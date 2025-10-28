@@ -56,31 +56,7 @@ export function KeyboardCanvas() {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4 overflow-hidden relative" onClick={handleCanvasClick}>
-      {/* 粒子效果 */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
-            initial={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
-              opacity: 0,
-            }}
-            animate={{
-              y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080)],
-              opacity: [0, 0.6, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 4,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-            }}
-          />
-        ))}
-      </div>
-
+    <div className="w-full h-full flex items-center justify-center overflow-hidden relative" onClick={handleCanvasClick}>
       {/* 键盘容器 */}
       <ContextMenu>
         <ContextMenuTrigger>

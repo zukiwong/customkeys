@@ -41,6 +41,41 @@ export function DesignWorkspace() {
 
       {/* 主工作区 */}
       <div className="flex-1 flex overflow-hidden relative">
+        {/* 背景效果层 - 粒子和扫描线 */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* 粒子效果 */}
+          {[...Array(30)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+              initial={{
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
+                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
+                opacity: 0,
+              }}
+              animate={{
+                y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080)],
+                opacity: [0, 0.6, 0],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* 扫描线效果 */}
+        <div className="absolute inset-0 pointer-events-none opacity-5">
+          <div
+            className="w-full h-full"
+            style={{
+              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, cyan 2px, cyan 4px)',
+            }}
+          />
+        </div>
+
         {/* 左侧资产库面板 */}
         <AnimatePresence>
           {viewConfig.showLeftPanel && (
@@ -73,7 +108,7 @@ export function DesignWorkspace() {
         </AnimatePresence>
 
         {/* 中央画布区域 */}
-        <div className="flex-1 flex items-center justify-center overflow-auto p-8 relative">
+        <div className="flex-1 flex items-center justify-center overflow-auto relative">
           <KeyboardCanvas />
         </div>
 
