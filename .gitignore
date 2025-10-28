@@ -69,3 +69,6 @@ backend/uploads/
 # Documentation files
 **/*.md
 !README.md
+
+# Figma original code (for reference only)
+CustomKeys Design Tool/

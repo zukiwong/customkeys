@@ -22,7 +22,6 @@ export function KeyboardCanvas() {
   const selectedKeycapIds = useKeyboardStore((state) => state.selectedKeycapIds);
   const layout = useKeyboardStore((state) => state.layout);
   const baseStyle = useKeyboardStore((state) => state.baseStyle);
-  const switchHeight = useKeyboardStore((state) => state.switchHeight);
   const viewConfig = useKeyboardStore((state) => state.viewConfig);
 
   // 从 store 获取方法
@@ -56,11 +55,6 @@ export function KeyboardCanvas() {
     }
   };
 
-  // 3D 变换
-  const transform3D = viewConfig.view3D
-    ? `perspective(1200px) rotateX(30deg) rotateY(0deg) rotateZ(0deg)`
-    : `perspective(2000px) rotateX(0deg)`;
-
   return (
     <div className="w-full h-full flex items-center justify-center p-4 overflow-hidden relative" onClick={handleCanvasClick}>
       {/* 粒子效果 */}
@@ -90,12 +84,27 @@ export function KeyboardCanvas() {
       {/* 键盘容器 */}
       <ContextMenu>
         <ContextMenuTrigger>
-          <motion.div
+          <div
             className="relative"
-            style={{ transform: transform3D, transformStyle: 'preserve-3d' }}
-            animate={{ rotateY: viewConfig.view3D ? [0, 2, 0] : 0 }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              perspective: '1200px',
+            }}
           >
+            <motion.div
+              animate={{
+                transform: viewConfig.view3D
+                  ? 'rotateX(30deg) rotateY(0deg) rotateZ(0deg)'
+                  : 'rotateX(0deg)'
+              }}
+              transition={{
+                duration: 0.5,
+                type: 'spring',
+                stiffness: 100
+              }}
+              style={{
+                transformStyle: 'preserve-3d'
+              }}
+            >
             {/* 键盘底座 */}
             {viewConfig.showBase && (
               <div
@@ -126,7 +135,8 @@ export function KeyboardCanvas() {
                 />
               ))}
             </svg>
-          </motion.div>
+            </motion.div>
+          </div>
         </ContextMenuTrigger>
 
         {/* 右键菜单 */}
