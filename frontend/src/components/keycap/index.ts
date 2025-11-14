@@ -9,3 +9,6 @@ export * from './Keycap3DSides';
 export * from './KeycapTopSurface';
 export * from './KeycapText';
 export * from './KeycapSelection';
+export * from './KeycapRealistic';
+export * from './KeycapCSS';
+export * from './KeycapHybrid';

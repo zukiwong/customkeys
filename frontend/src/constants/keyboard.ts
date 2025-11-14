@@ -12,8 +12,8 @@ export const UNIT_SIZE = 54;
 /** 按键之间的间隙（像素） */
 export const GAP = 4;
 
-/** 键帽的 3D 深度（像素） */
-export const KEYCAP_DEPTH = 12;
+/** 键帽的 3D 深度（像素） - 增加深度让键帽更立体 */
+export const KEYCAP_DEPTH = 18;
 
 /** 画布边距 */
 export const CANVAS_PADDING = 20;
@@ -23,11 +23,11 @@ export const CANVAS_PADDING = 20;
 /** 光源角度（度） */
 export const LIGHT_ANGLE = -135;
 
-/** 阴影 X 偏移 */
-export const SHADOW_OFFSET_X = 4;
+/** 阴影 X 偏移 - 增加偏移让阴影更明显 */
+export const SHADOW_OFFSET_X = 6;
 
-/** 阴影 Y 偏移 */
-export const SHADOW_OFFSET_Y = 4;
+/** 阴影 Y 偏移 - 增加偏移让阴影更明显 */
+export const SHADOW_OFFSET_Y = 6;
 
 // ============= 默认样式常量 =============
 

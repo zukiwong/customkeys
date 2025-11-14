@@ -142,38 +142,33 @@ export function hslToHex(h: number, s: number, l: number): string {
 // ============= 颜色调整 =============
 
 /**
- * 加深颜色
+ * 加深颜色（SASS darken 兼容）
  * @param color - 十六进制颜色字符串
- * @param amount - 加深程度 (0-1)，0 为黑色，1 为原色
+ * @param amount - 加深百分比 (0-100)，例如 16 表示降低 16% 亮度
  * @returns RGB 颜色字符串 (如 "rgb(100, 50, 25)")
  */
 export function darkenColor(color: string, amount: number): string {
   if (color.startsWith('#')) {
-    const hex = color.replace('#', '');
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-    return `rgb(${Math.round(r * amount)}, ${Math.round(g * amount)}, ${Math.round(b * amount)})`;
+    const hsl = hexToHsl(color);
+    // 降低亮度（SASS darken 逻辑）
+    const newL = Math.max(0, hsl.l - amount);
+    return hslToHex(hsl.h, hsl.s, newL);
   }
   return color;
 }
 
 /**
- * 提亮颜色
+ * 提亮颜色（SASS lighten 兼容）
  * @param color - 十六进制颜色字符串
- * @param amount - 提亮程度 (0-1)，0 为原色，1 为白色
+ * @param amount - 提亮百分比 (0-100)，例如 2 表示提高 2% 亮度
  * @returns RGB 颜色字符串 (如 "rgb(200, 150, 125)")
  */
 export function brightenColor(color: string, amount: number): string {
   if (color.startsWith('#')) {
-    const hex = color.replace('#', '');
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-
-    const brighten = (val: number) => Math.min(255, Math.round(val + (255 - val) * amount));
-
-    return `rgb(${brighten(r)}, ${brighten(g)}, ${brighten(b)})`;
+    const hsl = hexToHsl(color);
+    // 提高亮度（SASS lighten 逻辑）
+    const newL = Math.min(100, hsl.l + amount);
+    return hslToHex(hsl.h, hsl.s, newL);
   }
   return color;
 }

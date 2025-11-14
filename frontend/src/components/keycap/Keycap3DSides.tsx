@@ -28,7 +28,7 @@ export function Keycap3DSides({ x, y, width, height, keycapId, mainColor }: Keyc
           Z
         `}
         fill={`url(#leftSide-${keycapId})`}
-        opacity={0.9}
+        opacity={0.95}
       />
 
       {/* 顶侧面 - 较亮（面向光源） */}
@@ -41,7 +41,7 @@ export function Keycap3DSides({ x, y, width, height, keycapId, mainColor }: Keyc
           Z
         `}
         fill={`url(#topSide-${keycapId})`}
-        opacity={0.9}
+        opacity={0.95}
       />
 
       {/* 右侧面 - 较暗（背离光源） */}
@@ -54,10 +54,10 @@ export function Keycap3DSides({ x, y, width, height, keycapId, mainColor }: Keyc
           Z
         `}
         fill={`url(#rightSide-${keycapId})`}
-        opacity={0.95}
+        opacity={1}
       />
 
-      {/* 底侧面 - 较暗（背离光源） */}
+      {/* 底侧面 - 最暗（背离光源） */}
       <path
         d={`
           M ${x} ${y + height}
@@ -67,7 +67,7 @@ export function Keycap3DSides({ x, y, width, height, keycapId, mainColor }: Keyc
           Z
         `}
         fill={`url(#bottomSide-${keycapId})`}
-        opacity={0.95}
+        opacity={1}
       />
 
       {/* 角落连接器增强 3D 效果 */}

@@ -6,7 +6,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useKeyboardStore } from '../../core/store';
-import { Keycap } from '../keycap';
+import { KeycapRealistic } from '../keycap';
 import { getLayoutDimensions } from '../../utils';
 import {
   ContextMenu,
@@ -32,14 +32,45 @@ export function KeyboardCanvas() {
 
   const dimensions = getLayoutDimensions(layout);
 
-  // 基础样式映射
+  // 基础样式映射 - 参考 CSS keyboard.css
+  // CSS: border: 13px solid #777; border-top-color: #666; border-bottom-color: #888;
   const baseStyles = {
-    'matte-black': 'bg-gradient-to-br from-gray-900 to-gray-950 shadow-2xl shadow-black/40',
-    'metal-gray': 'bg-gradient-to-br from-gray-600 to-gray-700 shadow-2xl shadow-gray-800/50',
-    'acrylic-white': 'bg-gradient-to-br from-gray-100 to-white shadow-2xl shadow-gray-400/30',
-    'brushed-silver': 'bg-gradient-to-br from-gray-400 to-gray-500 shadow-2xl shadow-gray-600/40',
-    'transparent-acrylic':
-      'bg-gradient-to-br from-white/30 via-white/20 to-white/10 backdrop-blur-sm shadow-2xl shadow-gray-400/20 border border-white/30',
+    'matte-black': `
+      bg-[radial-gradient(circle_at_center,_#111,_#222)]
+      border-[13px] border-[#777] border-t-[#666] border-b-[#888]
+      rounded-[4px]
+      shadow-[inset_0_1rem_1rem_rgba(0,0,0,0.5),_0_2rem_3rem_-0.5rem_rgba(0,0,0,0.55)]
+      outline outline-[3px] outline-[rgba(0,0,0,0.2)] outline-offset-[-1px]
+    `,
+    'metal-gray': `
+      bg-[radial-gradient(circle_at_center,_#444,_#666)]
+      border-[13px] border-[#888] border-t-[#777] border-b-[#999]
+      rounded-[4px]
+      shadow-[inset_0_1rem_1rem_rgba(0,0,0,0.4),_0_2rem_3rem_-0.5rem_rgba(0,0,0,0.45)]
+      outline outline-[3px] outline-[rgba(0,0,0,0.15)] outline-offset-[-1px]
+    `,
+    'acrylic-white': `
+      bg-[radial-gradient(circle_at_center,_#f0f0f0,_#e0e0e0)]
+      border-[13px] border-[#ccc] border-t-[#bbb] border-b-[#ddd]
+      rounded-[4px]
+      shadow-[inset_0_1rem_1rem_rgba(0,0,0,0.15),_0_2rem_3rem_-0.5rem_rgba(0,0,0,0.25)]
+      outline outline-[3px] outline-[rgba(0,0,0,0.1)] outline-offset-[-1px]
+    `,
+    'brushed-silver': `
+      bg-[radial-gradient(circle_at_center,_#999,_#777)]
+      border-[13px] border-[#aaa] border-t-[#999] border-b-[#bbb]
+      rounded-[4px]
+      shadow-[inset_0_1rem_1rem_rgba(0,0,0,0.3),_0_2rem_3rem_-0.5rem_rgba(0,0,0,0.35)]
+      outline outline-[3px] outline-[rgba(0,0,0,0.12)] outline-offset-[-1px]
+    `,
+    'transparent-acrylic': `
+      bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.2),_rgba(255,255,255,0.1))]
+      backdrop-blur-sm
+      border-[13px] border-[rgba(255,255,255,0.3)] border-t-[rgba(255,255,255,0.25)] border-b-[rgba(255,255,255,0.35)]
+      rounded-[4px]
+      shadow-[inset_0_1rem_1rem_rgba(0,0,0,0.2),_0_2rem_3rem_-0.5rem_rgba(0,0,0,0.3)]
+      outline outline-[3px] outline-[rgba(255,255,255,0.2)] outline-offset-[-1px]
+    `,
   };
 
   // 键帽点击处理
@@ -101,12 +132,11 @@ export function KeyboardCanvas() {
               style={{ display: 'block' }}
             >
               {keycaps.map((keycap) => (
-                <Keycap
+                <KeycapRealistic
                   key={keycap.id}
                   keycap={keycap}
                   isSelected={selectedKeycapIds.includes(keycap.id)}
                   onClick={(e) => handleKeycapClick(keycap.id, e)}
-                  view3D={viewConfig.view3D}
                   layout={layout}
                 />
               ))}

@@ -36,13 +36,14 @@ export function KeycapTopSurface({
         filter={isSelected ? 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.7))' : 'none'}
       />
 
-      {/* 弧形表面高光 - 模拟圆形顶面的光线反射 */}
+      {/* 弧形表面高光 - 更强的光线反射 */}
       <ellipse
         cx={x + width * 0.35}
-        cy={y + height * 0.35}
-        rx={width * 0.35}
-        ry={height * 0.3}
+        cy={y + height * 0.3}
+        rx={width * 0.4}
+        ry={height * 0.35}
         fill={`url(#radialHighlight-${keycapId})`}
+        opacity={0.9}
         pointerEvents="none"
       />
 
@@ -56,41 +57,41 @@ export function KeycapTopSurface({
         ry={7}
         fill="none"
         stroke={`url(#edgeRim-${keycapId})`}
+        strokeWidth={1.5}
+        pointerEvents="none"
+      />
+
+      {/* 左上高光线（最亮边缘）- 更明显 */}
+      <path
+        d={`M ${x + 6} ${y + 2} L ${x + width * 0.7} ${y + 2}`}
+        stroke="rgba(255, 255, 255, 0.7)"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        fill="none"
+        pointerEvents="none"
+      />
+      <path
+        d={`M ${x + 2} ${y + 6} L ${x + 2} ${y + height * 0.6}`}
+        stroke="rgba(255, 255, 255, 0.6)"
         strokeWidth={1.2}
+        strokeLinecap="round"
+        fill="none"
         pointerEvents="none"
       />
 
-      {/* 左上高光线（最亮边缘） */}
+      {/* 右下阴影线（最暗边缘）- 更深 */}
       <path
-        d={`M ${x + 4} ${y + 2} L ${x + width * 0.6} ${y + 2}`}
-        stroke="rgba(255, 255, 255, 0.5)"
+        d={`M ${x + width - 6} ${y + height - 2} L ${x + width * 0.3} ${y + height - 2}`}
+        stroke="rgba(0, 0, 0, 0.35)"
+        strokeWidth={1.2}
+        strokeLinecap="round"
+        fill="none"
+        pointerEvents="none"
+      />
+      <path
+        d={`M ${x + width - 2} ${y + height - 6} L ${x + width - 2} ${y + height * 0.4}`}
+        stroke="rgba(0, 0, 0, 0.3)"
         strokeWidth={1}
-        strokeLinecap="round"
-        fill="none"
-        pointerEvents="none"
-      />
-      <path
-        d={`M ${x + 2} ${y + 4} L ${x + 2} ${y + height * 0.5}`}
-        stroke="rgba(255, 255, 255, 0.4)"
-        strokeWidth={0.8}
-        strokeLinecap="round"
-        fill="none"
-        pointerEvents="none"
-      />
-
-      {/* 右下阴影线（最暗边缘） */}
-      <path
-        d={`M ${x + width - 4} ${y + height - 2} L ${x + width * 0.4} ${y + height - 2}`}
-        stroke="rgba(0, 0, 0, 0.2)"
-        strokeWidth={0.8}
-        strokeLinecap="round"
-        fill="none"
-        pointerEvents="none"
-      />
-      <path
-        d={`M ${x + width - 2} ${y + height - 4} L ${x + width - 2} ${y + height * 0.5}`}
-        stroke="rgba(0, 0, 0, 0.15)"
-        strokeWidth={0.6}
         strokeLinecap="round"
         fill="none"
         pointerEvents="none"
